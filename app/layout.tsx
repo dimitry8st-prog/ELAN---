@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "ÉLAN — кабинет доказательной косметологии",
-  description: "Персональная косметология, консультации врачей, аппаратные и инъекционные процедуры.",
+  description: "Консультации по уходу за кожей, понятный план процедур и естественный результат.",
   other: { "codex-preview": "development" },
 };
 

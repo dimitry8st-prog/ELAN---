@@ -29,6 +29,45 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
+    if (url.pathname === "/api/requests") {
+      if (request.method !== "POST") {
+        return Response.json({ message: "Метод не поддерживается." }, { status: 405 });
+      }
+
+      try {
+        const payload = await request.json() as Record<string, unknown>;
+        const clean = (value: unknown, maxLength: number) =>
+          typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+
+        if (clean(payload.website, 200)) {
+          return Response.json({ ok: true });
+        }
+
+        const name = clean(payload.name, 80);
+        const contact = clean(payload.contact, 120);
+        const question = clean(payload.question, 1000);
+
+        if (name.length < 2 || contact.length < 5) {
+          return Response.json(
+            { message: "Проверьте имя и контакт для связи." },
+            { status: 400 },
+          );
+        }
+
+        await env.DB.prepare(
+          "INSERT INTO consultation_requests (name, contact, question) VALUES (?, ?, ?)",
+        ).bind(name, contact, question).run();
+
+        return Response.json({ ok: true }, { status: 201 });
+      } catch (error) {
+        console.error("Unable to save consultation request", error);
+        return Response.json(
+          { message: "Сервис временно недоступен. Попробуйте отправить заявку позже." },
+          { status: 503 },
+        );
+      }
+    }
+
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
       return handleImageOptimization(request, {
