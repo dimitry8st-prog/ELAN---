@@ -50,7 +50,7 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="heroCopy">
-          <p className="eyebrow">Доказательная косметология · Москва</p>
+          <p className="eyebrow">Доказательная косметология</p>
           <h1>Красота, которая <em>остаётся вами</em></h1>
           <p className="heroText">Персональный план процедур — бережно, честно и с естественным результатом.</p>
           <div className="heroActions">
@@ -125,7 +125,7 @@ export default function Home() {
         <form onSubmit={(e) => {e.preventDefault(); alert("Спасибо! Мы свяжемся с вами в ближайшее время.");}}><label>Ваше имя<input required name="name" placeholder="Анна"/></label><label>Телефон<input required name="phone" type="tel" placeholder="+7 (___) ___-__-__"/></label><label className="consent"><input required type="checkbox"/> <span>Согласен(на) на обработку персональных данных</span></label><button className="button primary" type="submit">Отправить заявку</button></form>
       </section>
 
-      <footer id="contacts"><div className="brand footerBrand"><span>ÉLAN</span><small>кабинет косметологии</small></div><div><b>Москва, ул. Примерная, 12</b><span>Ежедневно 09:00–21:00</span></div><div className="messengers"><a href="#booking">WhatsApp</a><a href="#booking">Telegram</a></div><small>© 2026 ÉLAN · Информация на сайте не является публичной офертой</small></footer>
+      <footer id="contacts"><div className="brand footerBrand"><span>ÉLAN</span><small>кабинет косметологии</small></div><div><b>ул. Примерная, 12</b><span>Ежедневно 09:00–21:00</span></div><div className="messengers"><a href="#booking">WhatsApp</a><a href="#booking">Telegram</a></div><small>© 2026 ÉLAN · Информация на сайте не является публичной офертой</small></footer>
     </main>
   );
 }
